@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>COMP584 Assignment 1</title>
+	<script type='text/javascript' 
+	src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'></script>
+	<script type='text/javascript'>
+		var socket = io('http://localhost:3000', {path: '/socket.io'}); // connect to server
+		socket.on('serverGreeting', function(data) { // listen for serverGreeting message
+			console.log('Server says: Hello'); 
+			socket.emit('clientGreeting', {id: 'Hithere'}); // send clientGreeting message to server
+			
+			socket.on('serverReply', function(data) { // listen for serverReply message
+				console.log('Server says: How are you?');
+				socket.emit('clientReply', {id: 'Great'}); // send clientGreeting message to server
+			});
+		});
+	</script>
+  </head>
+  <body>
+  </body>
+</html>
